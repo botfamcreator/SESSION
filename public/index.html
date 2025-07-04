@@ -1,0 +1,25 @@
+!DOCTYPE html>
+<html>
+<head>
+  <title>Session Generator</title>
+</head>
+<body style="text-align:center; font-family:sans-serif;">
+  <h2>📱 WhatsApp Pair Code Generator</h2>
+  <input id="num" placeholder="Enter number (e.g. 91xxxxxxxxxx)" />
+  <button onclick="getCode()">Generate Pair Code</button>
+  <pre id="output"></pre>
+
+  <br><br>
+  <img src="/api/session-count" alt="Session Badge" />
+
+  <script>
+    async function getCode() {
+      const number = document.getElementById("num").value;
+      if (!number) return alert("Enter number with country code!");
+      const res = await fetch(`/generate?number=${number}`);
+      const data = await res.json();
+      document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
